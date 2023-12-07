@@ -37,7 +37,7 @@ def add2vectordb(df):
     client = chromadb.PersistentClient()
 
     collection = client.get_or_create_collection(
-        name="kakaochannel_collection",
+        name="kchannel_collection",
         metadata={"hnsw:space": "cosine"}
     )
 
@@ -58,8 +58,10 @@ def add2vectordb(df):
         ids=ids
     )
     # DB 쿼리 
-    query_result = collection.query(query_texts=["기능"], n_results=1)
-    return query_result
+    print(collection)
+    query_result = collection.query(query_texts=["기능"], n_results=3)
+    chat_source = query_result['documents'][0]
+    return chat_source
     
 def send_message(message_log, gpt_model="gpt-3.5-turbo", temperature=0.1):
     response = openai.ChatCompletion.create(
@@ -67,13 +69,12 @@ def send_message(message_log, gpt_model="gpt-3.5-turbo", temperature=0.1):
         messages=message_log,
         temperature=temperature
     )
-
     return response.choices[0].message.content
 
 def main():
-    chat_source = []
     df = read_data(file_path)
-    char_source = add2vectordb(df)
+    chat_source = add2vectordb(df)
+    #print(chat_source)
 
     message_log = [
         {
@@ -168,5 +169,7 @@ def main():
 
     window.bind('<Return>', lambda event: on_send())
     window.mainloop()
+
+
 if __name__ == "__main__":
     main()
