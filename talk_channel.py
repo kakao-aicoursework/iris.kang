@@ -61,13 +61,11 @@ def add2vectordb(df):
     query_result = collection.query(query_texts=["기능"], n_results=1)
     return query_result
     
-def send_message(message_log, functions, gpt_model="gpt-3.5-turbo", temperature=0.1):
+def send_message(message_log, gpt_model="gpt-3.5-turbo", temperature=0.1):
     response = openai.ChatCompletion.create(
         model=gpt_model,
         messages=message_log,
-        temperature=temperature,
-        functions=functions,
-        function_call='auto',
+        temperature=temperature
     )
 
     return response.choices[0].message.content
