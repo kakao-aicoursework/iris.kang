@@ -1,0 +1,3 @@
+[submodule "kakaochattest_guide"]
+	path = kakaochattest_guide
+	url = https://github.com/kakao-aicoursework/kakaochattest_guide
