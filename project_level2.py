@@ -74,9 +74,9 @@ def create_chatbot(file_path, question, response=""):
         response=response
     )
     context = chatbot_chain(context)
-
     context["answers"] =[]
     context = chains[-1](context)
+
     context["answers"].append(context[f"output_{len(chains) - 1}"])
     context["answers"] = context["answers"][0]
 

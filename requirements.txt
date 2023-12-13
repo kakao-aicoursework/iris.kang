@@ -1,0 +1,15 @@
+openai
+langchain
+llama_index
+tiktoken
+pypdf
+uvicorn
+fastapi
+pydantic
+firebase_admin
+docx2txt
+openpyxl
+python-multipart
+aiofiles
+chromadb==0.4.4
+psutil
