@@ -123,7 +123,8 @@ def generate_answer(user_message) -> dict[str, str]:
 
     return answer
 
-print(generate_answer('카카오톡채널을 소개하고 사용 방법을 알려주세요'))
-# resonse formulation chain
-# history
-    
+def main():
+    print(generate_answer('카카오톡채널을 소개하고 사용 방법을 알려주세요'))
+
+if __name__ == "__main__":
+    main()

@@ -29,10 +29,6 @@ DATA_DIR = os.path.dirname(__file__) + "/data" # data directory
 LOADER_DICT = {
     "txt": TextLoader
 }
-CHROMA_PERSIST_DIR = os.path.join(DATA_DIR, "upload/chroma-persist")
-CHROMA_COLLECTION_NAME = "dosu-bot"
-EMBED_MODEL = "text-embedding-ada-002"
-ids_id = 0
 
 def upload_embedding_from_file(file_path, file_name):
     data = TextLoader(file_path).load()
@@ -69,7 +65,7 @@ def upload_embedding_from_file(file_path, file_name):
         embeddings,
         table_name=table_name,
     )
-    #print(file_name, ' Vectorization complete!')
+    #print(file_name, 'Uploading to VectorDB completed!')
 
 def upload_embeddings_from_dir(dir_path):
     failed_upload_files = []
