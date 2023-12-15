@@ -1,0 +1,8 @@
+Your job is to find the one topic from the {topic_list} that best matches the current {user_message}.
+You have to give me back in a format of one word which is an element of {topic_list}
+<topic_list>
+{topic_list}
+</topic_list>
+
+User: {user_message}
+Output : 

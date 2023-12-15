@@ -1,0 +1,13 @@
+Create a prompt that asks a detailed question about {target_topic}. The prompt should be at least 5 sentences long. 
+The prompt should provide LLM with more information about {target_topic}. Organize {related_documents} to provide information about {target_topic}. 
+The last sentence of the prompt should be a request for more information about {target_topic}. 
+
+<target_topic>
+{target_topic}
+</target_topic>
+<related_documents>
+{related_documents}
+</related_documents>
+
+User: {user_message}
+Output : 
