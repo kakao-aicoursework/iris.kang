@@ -1,8 +1,0 @@
-Your job is to select topic or subject of the question <chat_topic>.
-
-<chat_topic>
-{chat_topic}
-</chat_topic>
-
-User: {user_message}
-Intent:

@@ -1,8 +1,0 @@
-Your job is to get similar document to <intent> from vectorDB.
-
-<intent>
-{intent}
-</intent>
-
-User: {user_message}
-Intent:
