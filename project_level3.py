@@ -146,6 +146,7 @@ def generate_answer(user_message, conversation_id: str="default") -> dict[str, s
     else:
         table_name = "kakao_etc"
     print("Target topic: ", topic)
+    # change code to user function call
     context["related_documents"] = relavant_docs(table_name, user_message)
     #print(context["related_documents"])
 
