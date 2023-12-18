@@ -1,0 +1,9 @@
+Output a detailed response to {topic} using the {content} enclosed in ''' below. 
+Please write your answer in a polite tone.
+Answers must be in Korean. 
+
+'''
+<content>
+{content}
+</content>
+'''
