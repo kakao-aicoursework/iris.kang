@@ -136,6 +136,8 @@ def generate_chain(llm):
 
     return chains
 
+# https://python.langchain.com/docs/use_cases/question_answering/
+
 def callback_handler(request: ChatbotRequest) -> dict:
     user_message = request.userRequest.utterance
 
@@ -175,10 +177,12 @@ def callback_handler(request: ChatbotRequest) -> dict:
 
     response_from_chain = chains["response_form_chain"]
     answer = response_from_chain.run(prompt)
+    
     # TO DO
     # - Enhance document using web search
     # - update chat history to context
-    # 
+    # - use function call for Vector embedding
+    
     log_user_message(history_file, user_message)
     log_bot_message(history_file, answer)
 
