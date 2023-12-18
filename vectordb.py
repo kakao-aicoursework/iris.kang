@@ -30,7 +30,7 @@ LOADER_DICT = {
     "txt": TextLoader
 }
 
-def upload_embedding_from_file(file_path, file_name):
+def upload_embedding_from_file(file_path):
     data = TextLoader(file_path).load()
     file_name = os.path.splitext(os.path.basename(file_path))[0]
     doc_topic = file_name.replace(".txt","").split("_")[2]
@@ -74,10 +74,10 @@ def upload_embeddings_from_dir(dir_path):
         for file in files:
             if file.endswith(".txt"):
                 file_path = os.path.join(root, file)
-                file_name = file.replace(".txt","").split("_")[2]
+                #file_name = file.replace(".txt","").split("_")[2]
                 #print(file_name)
                 try:
-                    upload_embedding_from_file(file_path, file_name)
+                    upload_embedding_from_file(file_path)
                     print("SUCCESS: ", file_path)
                 except Exception as e:
                     print("FAILED: ", file_path + f"by({e})")

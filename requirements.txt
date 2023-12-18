@@ -6,7 +6,7 @@ openai==0.28
 langchain
 llama_index
 tiktoken
-pypdf
+pypdf2==3.0.1
 pydantic
 firebase_admin
 docx2txt
@@ -15,4 +15,7 @@ python-multipart
 aiofiles
 psutil
 python-dotenv
+huggingface_hub
+transformers
+sentence_transformers
 
