@@ -113,16 +113,19 @@ def create_chain(llm, template_path, output_key):
 # generate chain
 def generate_chain(llm):
     chains = {
+        # 질문에서 주제를 파악하는 체인
         "parse_topic_chain": create_chain(
             llm=llm,
             template_path=PARSE_TOPIC_TEMPLATE,
             output_key="topic",
         ),
+        # 주제와 관련된 문서를 찾아서 prompt를 생성하는 체인
         "generate_prompt_chain": create_chain(
             llm=llm,
             template_path=GENERATE_PROMPT_TEMPLATE,
             output_key="prompt",
         ),
+        # prompt를 입력받아 답변을 생성하는 체인
         "response_form_chain": create_chain(
             llm=llm,
             template_path=RESPONSE_FORMULATION_TEMPLATE,
@@ -139,12 +142,14 @@ def callback_handler(request: ChatbotRequest) -> dict:
     conversation_id = "chat_" + datetime.now().strftime("%Y%m%d%H%M%S")
     history_file = load_conversation_history(conversation_id)
 
+    # topic_list.txt 중에서 해당하는 주제를 찾아서 target_topic에 저장
     context = dict(user_message=user_message)
     context["topic_list"] = read_prompt_template(TOPIC_LIST_TXT)
     
     llm = ChatOpenAI(temperature=0.1, max_tokens=2048, model="gpt-3.5-turbo")
     chains = generate_chain(llm)
 
+    # 해당 topic에 맞는 문서를 DB에서 찾아서 relavant documents을 search
     topic = chains["parse_topic_chain"].run(context)
     context["target_topic"] = topic
     if "채널" in topic:
@@ -157,9 +162,10 @@ def callback_handler(request: ChatbotRequest) -> dict:
         table_name = "kakao_etc"
     print("Target topic: ", topic)
 
-    # change code to user function call
+    # change code to user function call [질문]
     context["related_documents"] = relavant_docs(table_name, user_message)
 
+    # related documents를 이용해 prompt를 생성
     prompt = dict(topic="", content="")
     #generate prompt using related documents
     generate_prompt_chain = chains["generate_prompt_chain"]
