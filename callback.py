@@ -145,6 +145,7 @@ def callback_handler(request: ChatbotRequest) -> dict:
     # topic_list.txt 중에서 해당하는 주제를 찾아서 target_topic에 저장
     context = dict(user_message=user_message)
     context["topic_list"] = read_prompt_template(TOPIC_LIST_TXT)
+    context["chat_history"] = get_chat_history(conversation_id)
     
     llm = ChatOpenAI(temperature=0.1, max_tokens=2048, model="gpt-3.5-turbo")
     chains = generate_chain(llm)
@@ -174,7 +175,10 @@ def callback_handler(request: ChatbotRequest) -> dict:
 
     response_from_chain = chains["response_form_chain"]
     answer = response_from_chain.run(prompt)
-
+    # TO DO
+    # - Enhance document using web search
+    # - update chat history to context
+    # 
     log_user_message(history_file, user_message)
     log_bot_message(history_file, answer)
 
